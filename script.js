@@ -8,6 +8,11 @@ rockButton.addEventListener('click', () => playRound('rock'));
 paperButton.addEventListener('click', () => playRound('paper'));
 scissorsButton.addEventListener('click', () => playRound('scissors'));
 
+let playerScore = 0;
+let computerScore = 0;
+const playerScoreDisplay = document.getElementById('player-score');
+const computerScoreDisplay = document.getElementById('computer-score')
+
 function playRound(playerChoice) {
     const choices = ['rock', 'paper', 'scissors'];
     const computerChoice = choices[Math.floor(Math.random() * choices.length)];
@@ -20,8 +25,12 @@ function playRound(playerChoice) {
         (playerChoice === 'scissors' && computerChoice === 'paper')
     ) {
         resultDisplay.textContent = 'You win!';
+        playerScore++;
     } else {
-        resultDisplay.textContent = 'Computer wins!'
+        resultDisplay.textContent = 'Computer wins!';
+        computerScore++;
     }
-    console.log(resultDisplay)
+    
+    playerScoreDisplay.textContent = 'Player Score: ${playerScore}';
+    computerScoreDisplay.textContent = 'Computer Score: ${computerScore}';
 }
