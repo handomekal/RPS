@@ -11,7 +11,11 @@ scissorsButton.addEventListener('click', () => playRound('scissors'));
 let playerScore = 0;
 let computerScore = 0;
 const playerScoreDisplay = document.getElementById('player-score');
-const computerScoreDisplay = document.getElementById('computer-score')
+const computerScoreDisplay = document.getElementById('computer-score');
+
+let currentRound = 1;
+const totalRounds = 5;
+const roundDisplay = document.getElementById('round');
 
 function playRound(playerChoice) {
     const choices = ['rock', 'paper', 'scissors'];
