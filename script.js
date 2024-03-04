@@ -27,8 +27,6 @@ function playRound(playerChoice) {
         const choices = ['rock', 'paper', 'scissors'];
         const computerChoice = choices[Math.floor(Math.random() * choices.length)];
 
-
-
         if (playerChoice === computerChoice) {
             resultDisplay.textContent = 'It\'s a draw!';
         } else if (
@@ -48,22 +46,50 @@ function playRound(playerChoice) {
 
     }
     
-
     if (currentRound > totalRounds) {
         concludeGame();
     }
 }
 
 function concludeGame() {
-    let finalResult = '';
+    const gameContainer = document.getElementById('rps-game');
+    const choices = document.getElementById('choices');
+    const gameInfo = document.getElementById('game-info');
+    const roundRes = document.getElementById('result');
 
-    if (playerScore > computerScore) {
-        finalResult = 'Congratulations, you won the game!';
-    } else if (playerScore < computerScore) {
-        finalResult = 'Game over, the computer wins!';
-    } else {
-        finalResult = 'The game ends in a draw!';
+    if (choices) {
+        choices.style.display = 'none';
     }
 
-    resultDisplay.textContent = finalResult;
+    if (gameInfo) {
+        gameInfo.style.display = 'none';
+    }
+
+    if (roundRes) {
+        roundRes.style.display = 'none';
+    }
+
+    const gameConclusion = document.createElement('div');
+    gameConclusion.setAttribute('id', 'game-conclusion');
+
+    let finalMessage = '';
+    if (playerScore > computerScore) {
+        finalMessage = 'Congratulations, you won the game!';
+    } else if (playerScore < computerScore) {
+        finalMessage = 'Game over, the computer wins!';
+    } else {
+        finalMessage = 'The game ends in a draw!';
+    }
+
+    gameConclusion.innerHTML = `
+    <h2>Game Over</h2>
+    <p>${finalMessage}</p>
+    <p>Final Score - You: ${playerScore} | Computer: ${computerScore}</p>
+    `;
+
+    gameContainer.appendChild(gameConclusion);
+
+    document.getElementById('restart-btn').addEventListener('click', restartGame);
+
+    resultDisplay.textContent = finalMessage;
 }
