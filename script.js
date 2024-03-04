@@ -20,32 +20,50 @@ const roundDisplay = document.getElementById('round');
 function playRound(playerChoice) {
     if (currentRound <= totalRounds) {
 
-        roundDisplay.textContent = 'Round: ${currentRound} of ${totalRounds}';
+        roundDisplay.textContent = `Round: ${currentRound} of ${totalRounds}`;
         currentRound++;
+        console.log(currentRound);
 
         const choices = ['rock', 'paper', 'scissors'];
         const computerChoice = choices[Math.floor(Math.random() * choices.length)];
 
+
+
+        if (playerChoice === computerChoice) {
+            resultDisplay.textContent = 'It\'s a draw!';
+        } else if (
+            (playerChoice === 'rock' && computerChoice === 'scissors') ||
+            (playerChoice === 'paper' && computerChoice === 'rock') ||
+            (playerChoice === 'scissors' && computerChoice === 'paper')
+        ) {
+            resultDisplay.textContent = 'You win!';
+            playerScore++;
+        } else {
+            resultDisplay.textContent = 'Computer wins!';
+            computerScore++;
+        }
+
+        playerScoreDisplay.textContent = `Player Score: ${playerScore}`;
+        computerScoreDisplay.textContent = `Computer Score: ${computerScore}`;
+
     }
     
-    if (playerChoice === computerChoice) {
-        resultDisplay.textContent = 'It\'s a draw!';
-    } else if (
-        (playerChoice === 'rock' && computerChoice === 'scissors') ||
-        (playerChoice === 'paper' && computerChoice === 'rock') ||
-        (playerChoice === 'scissors' && computerChoice === 'paper')
-    ) {
-        resultDisplay.textContent = 'You win!';
-        playerScore++;
-    } else {
-        resultDisplay.textContent = 'Computer wins!';
-        computerScore++;
-    }
-    
-    playerScoreDisplay.textContent = 'Player Score: ${playerScore}';
-    computerScoreDisplay.textContent = 'Computer Score: ${computerScore}';
 
     if (currentRound > totalRounds) {
         concludeGame();
     }
+}
+
+function concludeGame() {
+    let finalResult = '';
+
+    if (playerScore > computerScore) {
+        finalResult = 'Congratulations, you won the game!';
+    } else if (playerScore < computerScore) {
+        finalResult = 'Game over, the computer wins!';
+    } else {
+        finalResult = 'The game ends in a draw!';
+    }
+
+    resultDisplay.textContent = finalResult;
 }
