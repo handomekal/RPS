@@ -19,15 +19,13 @@ const roundDisplay = document.getElementById('round');
 
 function playRound(playerChoice) {
     if (currentRound <= totalRounds) {
-        const choices = ['rock', 'paper', 'scissors'];
-        const computerChoice = choices[Math.floor(Math.random() * choices.length)];
 
         roundDisplay.textContent = 'Round: ${currentRound} of ${totalRounds}';
         currentRound++;
-    }
 
-    if (currentRound > totalRounds) {
-        concludeGame();
+        const choices = ['rock', 'paper', 'scissors'];
+        const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
     }
     
     if (playerChoice === computerChoice) {
@@ -46,4 +44,8 @@ function playRound(playerChoice) {
     
     playerScoreDisplay.textContent = 'Player Score: ${playerScore}';
     computerScoreDisplay.textContent = 'Computer Score: ${computerScore}';
+
+    if (currentRound > totalRounds) {
+        concludeGame();
+    }
 }
