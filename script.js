@@ -18,9 +18,18 @@ const totalRounds = 5;
 const roundDisplay = document.getElementById('round');
 
 function playRound(playerChoice) {
-    const choices = ['rock', 'paper', 'scissors'];
-    const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+    if (currentRound <= totalRounds) {
+        const choices = ['rock', 'paper', 'scissors'];
+        const computerChoice = choices[Math.floor(Math.random() * choices.length)];
 
+        roundDisplay.textContent = 'Round: ${currentRound} of ${totalRounds}';
+        currentRound++;
+    }
+
+    if (currentRound > totalRounds) {
+        concludeGame();
+    }
+    
     if (playerChoice === computerChoice) {
         resultDisplay.textContent = 'It\'s a draw!';
     } else if (
